@@ -16,8 +16,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class singInController {
 
@@ -40,11 +42,16 @@ public class singInController {
         User user = new User();
         user.setUsername(tfUser.getText());
         user.setIsAdmin(cbAdmin.isSelected());
+
         String passSinCifrar = pfPassword.getText();
-        MessageDigest cifrado = MessageDigest.getInstance("MD5");
-        cifrado.reset();
-        cifrado.update(passSinCifrar.getBytes());
-        user.setPassword(cifrado.digest());
+
+        MessageDigest cifrado = MessageDigest.getInstance("SHA-256");
+
+        byte[] passwordBytes = cifrado.digest(passSinCifrar.getBytes(StandardCharsets.UTF_8));
+        String passwordEncrypted = Base64.getEncoder().encodeToString(passwordBytes);
+
+        user.setPassword(passwordEncrypted);
+        ;
         Call<User> call = apiService.signIn(user);
         call.enqueue(new Callback<>() {
             @Override

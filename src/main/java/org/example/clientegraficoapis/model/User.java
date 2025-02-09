@@ -4,13 +4,13 @@ package org.example.clientegraficoapis.model;
 public class User {
     private String username;
 
-    private byte[] password;
+    private String password;
 
     private Boolean isAdmin = false;
 
     public User(){}
 
-    public User(String user, byte[] password){
+    public User(String user, String password){
         this.username = user;
         this.password = password;
         this.isAdmin = false;
@@ -24,11 +24,11 @@ public class User {
         this.isAdmin = esAdmin;
     }
 
-    public byte[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

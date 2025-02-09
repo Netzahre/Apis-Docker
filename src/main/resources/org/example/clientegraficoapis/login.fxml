@@ -11,18 +11,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="606.0" prefWidth="464.0" stylesheets="@../../../css/amazon.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.clientegraficoapis.controller.logInController">
+<VBox alignment="TOP_CENTER" prefHeight="606.0" prefWidth="464.0" stylesheets="@../../../css/amazon.css"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.clientegraficoapis.controller.logInController">
     <children>
         <AnchorPane prefHeight="144.0" prefWidth="464.0">
             <children>
-                <ImageView fitHeight="67.0" fitWidth="342.0" layoutX="87.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="67.0" fitWidth="342.0" layoutX="87.0" layoutY="85.0" pickOnBounds="true"
+                           preserveRatio="true">
                     <image>
-                        <Image url="@../../../images/logo.png" />
+                        <Image url="@../../../images/logo.png"/>
                     </image>
                 </ImageView>
                 <Label layoutX="67.0" text="Amazon't">
                     <font>
-                        <Font name="Arial Bold" size="74.0" />
+                        <Font name="Arial Bold" size="74.0"/>
                     </font>
                 </Label>
             </children>
@@ -31,51 +34,58 @@
             <children>
                 <Label text="Iniciar Sesion">
                     <font>
-                        <Font name="Arial Bold" size="40.0" />
+                        <Font name="Arial Bold" size="40.0"/>
                     </font>
                 </Label>
                 <VBox alignment="TOP_CENTER" spacing="10.0">
                     <children>
                         <Label text="Usuario">
                             <font>
-                                <Font name="Arial Bold" size="30.0" />
+                                <Font name="Arial Bold" size="30.0"/>
                             </font>
                         </Label>
-                        <TextField fx:id="tfUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="366.0" />
+                        <TextField fx:id="tfUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                   minWidth="-Infinity" prefHeight="38.0" prefWidth="366.0"/>
                     </children>
                 </VBox>
                 <VBox alignment="TOP_CENTER" spacing="10.0">
                     <children>
                         <Label text="Contraseña">
                             <font>
-                                <Font name="Arial Bold" size="30.0" />
+                                <Font name="Arial Bold" size="30.0"/>
                             </font>
                         </Label>
-                  <PasswordField fx:id="pfPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="366.0" />
+                        <PasswordField fx:id="pfPassword" maxHeight="-Infinity" maxWidth="-Infinity"
+                                       minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="366.0"/>
                     </children>
                 </VBox>
                 <VBox alignment="TOP_CENTER" prefHeight="143.0" prefWidth="464.0" spacing="15.0">
                     <children>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Iniciar Sesion">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="154.0"
+                                styleClass="button-amazon" text="Iniciar Sesion">
                             <font>
-                                <Font size="28.0" />
+                                <Font size="28.0"/>
                             </font>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signIn" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Crear Cuenta">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                mnemonicParsing="false" onAction="#signIn" prefHeight="40.0" prefWidth="154.0"
+                                styleClass="button-amazon" text="Crear Cuenta">
                             <font>
-                                <Font size="28.0" />
+                                <Font size="28.0"/>
                             </font>
                         </Button>
-                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Salir" onAction="#salir">
+                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0"
+                                prefWidth="154.0" styleClass="button-amazon" text="Salir" onAction="#salir">
                             <font>
-                                <Font size="28.0" />
+                                <Font size="28.0"/>
                             </font>
                         </Button>
                     </children>
                 </VBox>
             </children>
             <padding>
-                <Insets top="15.0" />
+                <Insets top="15.0"/>
             </padding>
         </VBox>
     </children>

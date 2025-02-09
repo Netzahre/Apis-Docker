@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0"
             prefWidth="1280.0" style="-fx-background-color: #E5E7E8;" stylesheets="@../../../css/amazon.css"
-            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.clientegraficoapis.controller.storeController">
     <children>
         <HBox alignment="TOP_CENTER" layoutX="-9.0" prefHeight="56.0" prefWidth="1290.0" styleClass="nav-bar">
             <children>

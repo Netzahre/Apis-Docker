@@ -156,19 +156,19 @@ public class storeController {
     public void openModifyProduct() throws IOException {
         Stage stage = (Stage) tvProducts.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/productForm.fxml"));
-
         if (tvProducts.getSelectionModel().getSelectedItems().size() == 1) {
             Scene scene = new Scene(loader.load());
             productFormController controller = loader.getController();
             controller.setProduct(tvProducts.getSelectionModel().getSelectedItem());
             stage.setScene(scene);
             stage.setTitle("Modificar producto de Amazon't");
+            loadProducts();
+
         } else {
             showError("Seleccione un único producto.");
             System.out.println("Seleccione un único producto.");
-        }
-        loadProducts();
 
+        }
     }
 
     @FXML

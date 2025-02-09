@@ -42,7 +42,7 @@
                                 <Font name="Arial Bold" size="30.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="tfUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="366.0" />
+                        <TextField fx:id="tfUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="366.0" />
                     </children>
                 </VBox>
                 <VBox alignment="TOP_CENTER" spacing="10.0">
@@ -63,7 +63,7 @@
                                 <Font size="28.0" />
                             </font>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Atras" onAction="#atras">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Atras" onAction="#back">
                             <font>
                                 <Font size="28.0" />
                             </font>

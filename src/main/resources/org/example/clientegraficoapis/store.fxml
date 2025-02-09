@@ -27,12 +27,12 @@
                 </VBox>
             </children>
         </HBox>
-        <TableView fx:id="tvProductos" layoutY="307.0" prefHeight="718.0" prefWidth="1280.0">
+        <TableView fx:id="tvProducts" layoutY="307.0" prefHeight="718.0" prefWidth="1280.0">
             <columns>
-                <TableColumn fx:id="idProducto" prefWidth="105.0" text="Id"/>
-                <TableColumn fx:id="nombreProducto" prefWidth="276.0" text="Nombre"/>
-                <TableColumn fx:id="descProducto" prefWidth="592.0" text="Descripcion"/>
-                <TableColumn fx:id="precioProducto" prefWidth="306.0" text="Precio"/>
+                <TableColumn fx:id="idProduct" prefWidth="105.0" text="Id"/>
+                <TableColumn fx:id="productName" prefWidth="276.0" text="Nombre"/>
+                <TableColumn fx:id="productDescription" prefWidth="592.0" text="Descripcion"/>
+                <TableColumn fx:id="productPrice" prefWidth="306.0" text="Precio"/>
             </columns>
         </TableView>
         <Label layoutX="488.0" layoutY="89.0" style="-fx-font-size: 60;" styleClass="label-title" text="Productos"/>

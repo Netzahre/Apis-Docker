@@ -44,7 +44,7 @@
                                 <Font name="Arial Bold" size="30.0"/>
                             </font>
                         </Label>
-                        <TextField fx:id="tfUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                        <TextField fx:id="tfUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                    minWidth="-Infinity" prefHeight="38.0" prefWidth="366.0"/>
                     </children>
                 </VBox>

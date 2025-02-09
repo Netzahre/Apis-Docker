@@ -21,7 +21,7 @@ public class logInController {
 
 
     private UserApiService apiService;
-    @FXML private TextField tfUsuario;
+    @FXML private TextField tfUser;
     @FXML private PasswordField pfPassword;
 
     @FXML
@@ -31,7 +31,7 @@ public class logInController {
 
     @FXML
     public void login() {
-        String user = tfUsuario.getText();
+        String user = tfUser.getText();
         String password = pfPassword.getText();
 
         Call<User> call = apiService.logIn(user, password);
@@ -42,7 +42,7 @@ public class logInController {
                     User user = response.body();
                     Session.setLoggedUser(user);
                     Platform.runLater(() -> {
-                        Stage currentStage = (Stage) tfUsuario.getScene().getWindow();
+                        Stage currentStage = (Stage) tfUser.getScene().getWindow();
                         try {
                             Stage stage = new Stage();
                             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/org/example/clientegraficoapis/store.fxml"))));
@@ -64,7 +64,7 @@ public class logInController {
     @FXML
     public void signIn() {
         try {
-            Stage stage = (Stage) tfUsuario.getScene().getWindow();
+            Stage stage = (Stage) tfUser.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/signin.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);

@@ -1,7 +1,7 @@
 package org.example.clientegraficoapis.controller;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,43 +20,43 @@ import java.util.List;
 public class storeController {
 
     @FXML
-    private TableView<Product> tvProductos;
+    private TableView<Product> tvProducts;
     @FXML
-    private TableColumn<Product, Integer> idProducto;
+    private TableColumn<Product, Integer> idProduct;
     @FXML
-    private TableColumn<Product, String> nombreProducto;
+    private TableColumn<Product, String> productName;
     @FXML
-    private TableColumn<Product, String> descProducto;
+    private TableColumn<Product, String> productDescription;
     @FXML
-    private TableColumn<Product, Double> precioProducto;
+    private TableColumn<Product, Double> productPrice;
 
     private ProductApiService apiService;
     private FTPService ftpService = new FTPService();
 
     @FXML
     public void initialize() {
-        inicializarTabla();
+        startTable();
         apiService = RetrofitProduct.getClient().create(ProductApiService.class);
-        tvProductos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        cargarProductos();
+        tvProducts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        loadProducts();
     }
 
-    private void inicializarTabla() {
-        idProducto.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nombreProducto.setCellValueFactory(new PropertyValueFactory<>("name"));
-        descProducto.setCellValueFactory(new PropertyValueFactory<>("description"));
-        precioProducto.setCellValueFactory(new PropertyValueFactory<>("price"));
+    private void startTable() {
+        idProduct.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
-    private void cargarProductos() {
+    private void loadProducts() {
         Call<List<Product>> call = apiService.getProducts();
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Product> products = response.body();
-                    tvProductos.getItems().clear();
-                    tvProductos.getItems().addAll(products);
+                    tvProducts.getItems().clear();
+                    tvProducts.getItems().addAll(products);
                 }
             }
 
@@ -68,25 +68,31 @@ public class storeController {
     }
 
     @FXML
-    protected void comprar() {
-        List<Product> productosSeleccionados = tvProductos.getSelectionModel().getSelectedItems();
+    protected void buy() {
+        List<Product> selectedProducts = tvProducts.getSelectionModel().getSelectedItems();
 
-        if (productosSeleccionados.isEmpty()) {
-            System.out.println("⚠️ No hay productos seleccionados.");
+        if (selectedProducts.isEmpty()) {
+            showError("No hay productos seleccionados.");
+            System.out.println("No hay productos seleccionados.");
             return;
         }
 
         System.out.println("🛒 Productos comprados:");
-        for (Product product : productosSeleccionados) {
+        StringBuilder purchasedProducts = new StringBuilder();
+        for (Product product : selectedProducts) {
             System.out.println("- " + product.getName() + " (Precio: " + product.getPrice() + ")");
+            purchasedProducts.append(product.getName() +" (Precio: " + product.getPrice() + ")" + "\n");
         }
+
+        //Añadido, comprobar.
+        showError(purchasedProducts.toString());
 
         //Mandar la compra a la api, la compra tiene la lista de productos y el nombre del comprador, codigo debajo
         Purchases purchases = new Purchases();
-        purchases.setProductList(productosSeleccionados);
+        purchases.setProductList(selectedProducts);
         purchases.setPurchaser(Session.getLoggedUser().getUsername());
         //Hacer post a la api
-        Call<Purchases> call = apiService.comprar(purchases);
+        Call<Purchases> call = apiService.buy(purchases);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<Purchases> call, Response<Purchases> response) {
@@ -95,7 +101,7 @@ public class storeController {
                     System.out.println("Compra realizada correctamente.");
 
                     //Procesar la compra en el FTP
-                    procesarCompra(purchases.getProductList().size(), calcularTotalCompra(purchases.getProductList()));
+                    processPurchase(purchases.getProductList().size(), calculateTotalPrice(purchases.getProductList()));
                 }
             }
 
@@ -109,8 +115,8 @@ public class storeController {
     }
 
     //REVISAR, PEGADO DE GEPETO
-    public void procesarCompra(int numProductos, double total) {
-        boolean resultado = ftpService.savePurchase(numProductos, total);
+    public void processPurchase(int numProducts, double total) {
+        boolean resultado = ftpService.savePurchase(numProducts, total);
         if (resultado) {
             System.out.println("Compra registrada en FTP correctamente.");
         } else {
@@ -118,11 +124,19 @@ public class storeController {
         }
     }
 
-    private double calcularTotalCompra(List<Product> productosSeleccionados) {
+    private double calculateTotalPrice(List<Product> selectedProducts) {
         double total = 0;
-        for (Product product : productosSeleccionados) {
+        for (Product product : selectedProducts) {
             total += product.getPrice();
         }
         return total;
+    }
+
+    public static void showError(String text) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
     }
 }

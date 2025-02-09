@@ -22,7 +22,7 @@ public class singInController {
 
     private UserApiService apiService;
     @FXML
-    private TextField tfUsuario;
+    private TextField tfUser;
     @FXML
     private PasswordField pfPassword;
     @FXML
@@ -36,7 +36,7 @@ public class singInController {
     @FXML
     public void signIn() {
         User user = new User();
-        user.setUsername(tfUsuario.getText());
+        user.setUsername(tfUser.getText());
         user.setPassword(pfPassword.getText());
         user.setIsAdmin(cbAdmin.isSelected());
 
@@ -66,7 +66,7 @@ public class singInController {
         });
     }
     @FXML
-    public void atras() throws IOException {
+    public void back() throws IOException {
         Stage actualScene = (Stage) cbAdmin.getScene().getWindow();
         Stage stage = new Stage();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/org/example/clientegraficoapis/login.fxml"))));

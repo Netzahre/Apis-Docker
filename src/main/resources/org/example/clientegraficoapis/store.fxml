@@ -37,7 +37,7 @@
         </TableView>
         <Label layoutX="488.0" layoutY="89.0" style="-fx-font-size: 60;" styleClass="label-title" text="Productos"/>
         <Button fx:id="botonComprar" layoutX="546.0" layoutY="215.0" mnemonicParsing="false" prefHeight="43.0"
-                prefWidth="182.0" style="-fx-font-size: 20px;" styleClass="button-buy" text="Comprar">
+                prefWidth="182.0" style="-fx-font-size: 20px;" styleClass="button-buy" text="Comprar" onAction="#buy">
             <font>
                 <Font size="20.0"/>
             </font>

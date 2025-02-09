@@ -79,6 +79,7 @@ public class storeController {
 
         System.out.println("🛒 Productos comprados:");
         StringBuilder purchasedProducts = new StringBuilder();
+        purchasedProducts.append("Ha comprado: "+"\n");
         for (Product product : selectedProducts) {
             System.out.println("- " + product.getName() + " (Precio: " + product.getPrice() + ")");
             purchasedProducts.append(product.getName() +" (Precio: " + product.getPrice() + ")" + "\n");

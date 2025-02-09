@@ -59,6 +59,7 @@ public class FTPService {
                 System.out.println("Error al conectar con el servidor FTP");
                 return false;
             }
+            System.out.println("Ha conectado al servidor FTP");
             String fileName = REMOTE_DIRECTORY + Session.getName() + "_compras.txt";
             String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String registro = fechaHora + " - Productos: " + numProductos + " - Total: " + total + "€\n";
@@ -67,7 +68,9 @@ public class FTPService {
                 // Descargar archivo si existe
                 InputStream inputStream = ftpClient.retrieveFileStream(fileName);
                 StringBuilder contenido = new StringBuilder();
+                System.out.println("compruebo el archivo");
                 if (inputStream != null) {
+                    System.out.println("existe!");
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -76,7 +79,7 @@ public class FTPService {
                     reader.close();
                     inputStream.close();
                     ftpClient.completePendingCommand(); // Importante para cerrar la conexión de datos
-                }
+                } else System.out.println("no existe.");
 
                 // Añadir nueva compra al contenido existente
                 contenido.append(registro);

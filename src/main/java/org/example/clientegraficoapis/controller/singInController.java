@@ -49,8 +49,7 @@ public class singInController {
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    User user = response.body();
+                if (response.isSuccessful()) {
                     Platform.runLater(() -> {
                         try {
                             Stage stage = new Stage();

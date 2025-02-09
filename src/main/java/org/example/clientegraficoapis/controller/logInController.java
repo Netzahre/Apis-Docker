@@ -16,6 +16,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class logInController {
 
@@ -30,11 +33,17 @@ public class logInController {
     }
 
     @FXML
-    public void login() {
+    public void login() throws NoSuchAlgorithmException {
         String user = tfUser.getText();
-        String password = pfPassword.getText();
+        String passSinCifrar = pfPassword.getText();
 
-        Call<User> call = apiService.logIn(user, password);
+        MessageDigest cifrado = MessageDigest.getInstance("MD5");
+        cifrado.update(passSinCifrar.getBytes());
+        byte[] passwordBytes = cifrado.digest();
+
+        String passwordBase64 = Base64.getEncoder().encodeToString(passwordBytes);
+
+        Call<User> call = apiService.logIn(user, passwordBase64);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -55,12 +64,14 @@ public class logInController {
                     });
                 }
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 t.printStackTrace();
             }
         });
     }
+
     @FXML
     public void signIn() {
         try {

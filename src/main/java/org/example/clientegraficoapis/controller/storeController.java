@@ -55,7 +55,7 @@ public class storeController {
     }
 
     private void startTable() {
-        idProduct.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idProduct.setCellValueFactory(new PropertyValueFactory<>("idProduct"));
         productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         productDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -176,6 +176,8 @@ public class storeController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/productForm.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
-        stage.setTitle("crear producto de Amazon't");
+        stage.setTitle("crear producto Amazon't");
+
+
     }
 }

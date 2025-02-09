@@ -1,10 +1,14 @@
 package org.example.clientegraficoapis.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Product {
-    private int idProduct;
+
+    @JsonProperty("productId")
+    private Integer idProduct;
 
     private String name;
 
@@ -22,11 +26,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getId() {
         return idProduct;
     }
 
-    public void setId(int idProduct) {
+    public void setId(Integer idProduct) {
         this.idProduct = idProduct;
     }
 

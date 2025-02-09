@@ -62,22 +62,20 @@ public class productFormController {
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {
                         Platform.runLater(() -> {
-
                             if (response.isSuccessful()) {
+                                Product createdProduct = response.body();
+                                System.out.println("Producto creado con id: " + createdProduct.getId());
+
+                                product = createdProduct;
                                 showMessage("Producto creado");
-                                System.out.println("Producto creado");
                             } else {
                                 showMessage("Error al crear el producto");
-                                System.out.println("Error al crear producto");
                             }
                         });
-
                     }
-
                     @Override
                     public void onFailure(Call<Product> call, Throwable throwable) {
                         showMessage("Error al crear el producto");
-                        System.out.println("Error al crear producto");
                     }
                 });
                 closeWindow();

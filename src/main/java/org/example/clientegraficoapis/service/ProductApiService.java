@@ -21,5 +21,5 @@ public interface ProductApiService {
     Call<Void> deleteProduct(@Body Product product);
 
     @PUT("product/{id}")
-    Call<Product> updateProduct(@Path("id") int id, @Body Product product);
+    Call<Product> updateProduct(@Path("id") Integer id, @Body Product product);
 }

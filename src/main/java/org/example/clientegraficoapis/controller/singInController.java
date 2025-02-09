@@ -16,6 +16,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class singInController {
 
@@ -34,12 +36,15 @@ public class singInController {
     }
 
     @FXML
-    public void signIn() {
+    public void signIn() throws NoSuchAlgorithmException {
         User user = new User();
         user.setUsername(tfUser.getText());
-        user.setPassword(pfPassword.getText());
         user.setIsAdmin(cbAdmin.isSelected());
-
+        String passSinCifrar = pfPassword.getText();
+        MessageDigest cifrado = MessageDigest.getInstance("MD5");
+        cifrado.reset();
+        cifrado.update(passSinCifrar.getBytes());
+        user.setPassword(cifrado.digest());
         Call<User> call = apiService.signIn(user);
         call.enqueue(new Callback<>() {
             @Override

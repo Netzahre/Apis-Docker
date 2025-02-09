@@ -2,6 +2,7 @@ package org.example.clientegraficoapis.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,6 +35,7 @@ public class storeController {
     public void initialize() {
         inicializarTabla();
         apiService = RetrofitProduct.getClient().create(ProductApiService.class);
+        tvProductos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         cargarProductos();
     }
 
@@ -51,9 +53,6 @@ public class storeController {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Product> products = response.body();
-                    for (Product product : products) {
-                        System.out.println(product.getName());
-                    }
                     tvProductos.getItems().clear();
                     tvProductos.getItems().addAll(products);
                 }

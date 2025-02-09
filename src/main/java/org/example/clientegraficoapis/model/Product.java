@@ -1,13 +1,9 @@
 package org.example.clientegraficoapis.model;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 public class Product {
-
-    @JsonProperty("productId")
     private Integer idProduct;
 
     private String name;
@@ -20,17 +16,19 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String description, double price) {
+    public Product(Integer id, String name, String description, double price) {
+        this.idProduct = id;
         this.name = name;
         this.description = description;
         this.price = price;
     }
 
-    public Integer getId() {
+    public Integer getIdProduct() {
         return idProduct;
     }
 
-    public void setId(Integer idProduct) {
+
+    public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
     }
 

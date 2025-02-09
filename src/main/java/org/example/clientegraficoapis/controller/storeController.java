@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import okhttp3.ResponseBody;
 import org.example.clientegraficoapis.model.Product;
 import org.example.clientegraficoapis.model.Purchases;
 import org.example.clientegraficoapis.service.*;
@@ -179,5 +180,36 @@ public class storeController {
         stage.setTitle("crear producto Amazon't");
 
 
+    }
+
+    @FXML
+    public void deleteProduct() {
+        List<Product> selectedProducts = tvProducts.getSelectionModel().getSelectedItems();
+        if (selectedProducts.isEmpty()) {
+            showError("No hay productos seleccionados.");
+            System.out.println("No hay productos seleccionados.");
+            return;
+        }
+        for (Product product : selectedProducts) {
+            Call<ResponseBody> call = apiService.deleteProduct(product.getIdProduct());
+            call.enqueue(new Callback<>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        System.out.println("Producto eliminado correctamente.");
+                        loadProducts();
+                    } else {
+                        showError("Error al eliminar el producto.");
+                        System.out.println("Error al eliminar el producto.");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    showError("Error al eliminar el producto.");
+                    System.out.println("Error al eliminar el producto.");
+                }
+            });
+        }
     }
 }

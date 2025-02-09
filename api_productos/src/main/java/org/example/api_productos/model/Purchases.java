@@ -13,7 +13,7 @@ public class Purchases {
     @Column (name = "purchaser")
     private String purchaser;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "purchase_id")
     private List<Product> productList;
 

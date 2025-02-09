@@ -17,7 +17,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("user")
-    public ResponseEntity<?> getUser(@RequestParam(name = "username") String nameInput, @RequestParam(name ="password") String passwordInput) {
+    public ResponseEntity<?> getUser(@RequestParam(name = "username") String nameInput, @RequestParam(name ="password") byte[] passwordInput) {
         Optional<User> userInput = userRepository.findByUsernameAndPassword(nameInput, passwordInput);
         if (userInput.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario no existe o la contraseña esta erronea");
@@ -27,7 +27,12 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public void signIn(@RequestBody User user){
-        userRepository.save(user);
+    public ResponseEntity<?> signIn(@RequestBody User user){
+        Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
+        if (existingUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario ya existe");
+        }
+        User savedUser = userRepository.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 }

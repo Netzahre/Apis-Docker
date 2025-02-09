@@ -9,14 +9,14 @@ public class User {
     private String username;
 
     @Column(nullable = false, name = "password")
-    private String password;
+    private byte[] password;
 
     @Column(nullable = false, name = "esAdmin")
     private Boolean isAdmin = false;
 
     public User(){}
 
-    public User (String user, String password){
+    public User (String user, byte[] password){
         this.username = user;
         this.password = password;
         this.isAdmin = false;
@@ -30,11 +30,11 @@ public class User {
         this.isAdmin = esAdmin;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
     }
 

@@ -1,6 +1,7 @@
 package org.example.clientegraficoapis.service;
 
 import org.example.clientegraficoapis.model.Product;
+import org.example.clientegraficoapis.model.Purchases;
 import org.example.clientegraficoapis.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -13,4 +14,7 @@ import java.util.List;
 public interface ProductApiService {
     @GET("product")
     Call<List<Product>> getProducts();
+
+    @POST("purchase")
+    Call<Purchases> comprar(@Body Purchases purchases);
 }

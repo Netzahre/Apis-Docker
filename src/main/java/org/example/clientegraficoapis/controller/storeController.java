@@ -7,7 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.clientegraficoapis.model.Product;
+import org.example.clientegraficoapis.model.Purchases;
 import org.example.clientegraficoapis.service.*;
+import org.example.clientegraficoapis.session.Session;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,10 +69,42 @@ public class storeController {
 
     @FXML
     protected void comprar() {
-        Product product = tvProductos.getSelectionModel().getSelectedItem();
-        if (product != null) {
-            System.out.println("Comprando: " + product.getName());
+        List<Product> productosSeleccionados = tvProductos.getSelectionModel().getSelectedItems();
+
+        if (productosSeleccionados.isEmpty()) {
+            System.out.println("⚠️ No hay productos seleccionados.");
+            return;
         }
+
+        System.out.println("🛒 Productos comprados:");
+        for (Product product : productosSeleccionados) {
+            System.out.println("- " + product.getName() + " (Precio: " + product.getPrice() + ")");
+        }
+
+        //Mandar la compra a la api, la compra tiene la lista de productos y el nombre del comprador, codigo debajo
+        Purchases purchases = new Purchases();
+        purchases.setProductList(productosSeleccionados);
+        purchases.setPurchaser(Session.getLoggedUser().getUsername());
+        //Hacer post a la api
+        Call<Purchases> call = apiService.comprar(purchases);
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<Purchases> call, Response<Purchases> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Purchases purchases = response.body();
+                    System.out.println("Compra realizada correctamente.");
+
+                    //Procesar la compra en el FTP
+                    procesarCompra(purchases.getProductList().size(), calcularTotalCompra(purchases.getProductList()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Purchases> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
 
     }
 
@@ -82,5 +116,13 @@ public class storeController {
         } else {
             System.out.println("Error al registrar la compra en FTP.");
         }
+    }
+
+    private double calcularTotalCompra(List<Product> productosSeleccionados) {
+        double total = 0;
+        for (Product product : productosSeleccionados) {
+            total += product.getPrice();
+        }
+        return total;
     }
 }

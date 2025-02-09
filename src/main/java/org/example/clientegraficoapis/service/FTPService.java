@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FTPService {
-        private static final String SERVER = "localhost";  // Cambia esto si tu servidor FTP está en otra dirección
+        private static final String SERVER = "127.0.0.1";  // Cambia esto si tu servidor FTP está en otra dirección
         private static final int PORT = 21;
         private static final String USER = "user";
         private static final String PASSWORD = "user";
-        private static final String REMOTE_DIRECTORY = "/clientsPurchases/";
+        private static final String REMOTE_DIRECTORY = "/purchases";
 
         private FTPClient ftpClient;
 
@@ -62,7 +62,7 @@ public class FTPService {
             }
             System.out.println("Ha conectado al servidor FTP");
 
-            String fileName = REMOTE_DIRECTORY + Session.getName() + "_compras.txt";
+            String fileName = REMOTE_DIRECTORY + "_" + Session.getName() + "_compras.txt";
             String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String registro = fechaHora + " - Productos: " + numProductos + " - Total: " + total + "€\n";
 

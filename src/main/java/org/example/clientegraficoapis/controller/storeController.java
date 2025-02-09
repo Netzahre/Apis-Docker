@@ -159,9 +159,9 @@ public class storeController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/productForm.fxml"));
 
         if (tvProducts.getSelectionModel().getSelectedItems().size() == 1) {
+            Scene scene = new Scene(loader.load());
             productFormController controller = loader.getController();
             controller.setProduct(tvProducts.getSelectionModel().getSelectedItem());
-            Scene scene = new Scene(loader.load());
             stage.setScene(scene);
             stage.setTitle("Modificar producto de Amazon't");
         } else {

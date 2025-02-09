@@ -149,14 +149,6 @@
     -fx-background-color: white;
 }
 
-.spinner {
-    -fx-border-color: #d5d9d9;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-    -fx-font-size: 14px;
-    -fx-padding: 5px;
-    -fx-background-color: white;
-}
 
 .spinner .increment-arrow-button,
 .spinner .decrement-arrow-button {

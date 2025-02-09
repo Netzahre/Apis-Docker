@@ -1,6 +1,7 @@
 package org.example.clientegraficoapis.controller;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,14 +34,14 @@ public class productFormController {
         tfDesc.setText("");
         tfPrecio.setText("");
         tfPrecio.setTextFormatter(new TextFormatter<>(change -> {
-            String newText = change.getControlNewText();
-            if (newText.isEmpty() || newText.matches("[0-9]\\.?[0-9]")) {
-                int dotCount = newText.length() - newText.replace(".", "").length();
-                if (dotCount <= 1) {
+            if (change.isContentChange()) {
+                String text = change.getControlNewText();
+                if (text.matches("([1-9][0-9]*)?([.][0-9]*)?")) {
                     return change;
                 }
+                return null;
             }
-            return null;
+            return change;
         }));
         apiService = RetrofitProduct.getClient().create(ProductApiService.class);
     }
@@ -60,18 +61,22 @@ public class productFormController {
                 call.enqueue(new Callback<Product>() {
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {
-                        if (response.isSuccessful()) {
-                            showError("Producto creado");
-                            System.out.println("Producto creado");
-                        } else {
-                            showError("Error al crear el producto");
-                            System.out.println("Error al crear producto");
-                        }
+                        Platform.runLater(() -> {
+
+                            if (response.isSuccessful()) {
+                                showMessage("Producto creado");
+                                System.out.println("Producto creado");
+                            } else {
+                                showMessage("Error al crear el producto");
+                                System.out.println("Error al crear producto");
+                            }
+                        });
+
                     }
 
                     @Override
                     public void onFailure(Call<Product> call, Throwable throwable) {
-                        showError("Error al crear el producto");
+                        showMessage("Error al crear el producto");
                         System.out.println("Error al crear producto");
                     }
                 });
@@ -79,23 +84,26 @@ public class productFormController {
             }
         } else {
             updateProduct();
-            Call<Product> call = apiService.updateProduct(product);
+            Call<Product> call = apiService.updateProduct(product.getId(), product);
             call.enqueue(new Callback<Product>() {
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {
-                    if (response.isSuccessful()) {
-                        showError("Producto actualizado");
-                        System.out.println("Producto actualizado");
-                    } else {
-                        showError("Error al actualizar el producto");
-                        System.out.println("Error al actualizar producto");
-                    }
+                    Platform.runLater(() -> {
+                        if (response.isSuccessful()) {
+                            showMessage("Producto actualizado");
+                            System.out.println("Producto actualizado");
+
+                        } else {
+                            showMessage("Error al actualizar el producto");
+                            System.out.println("Error al actualizar producto 2");
+                        }
+                    });
                 }
 
                 @Override
                 public void onFailure(Call<Product> call, Throwable throwable) {
-                    showError("Error al actualizar el producto");
-                    System.out.println("Error al actualizar producto");
+                    showMessage("Error al actualizar el producto");
+                    System.out.println("Error al actualizar producto 3");
                 }
             });
             closeWindow();
@@ -104,7 +112,7 @@ public class productFormController {
 
     private boolean createProduct() {
         if (tfNombre.getText().isEmpty() || tfDesc.getText().isEmpty() || tfPrecio.getText().isEmpty()) {
-            showError("No pueden existir campos vacios");
+            showMessage("No pueden existir campos vacios");
             return false;
         }
         product = new Product();
@@ -121,13 +129,16 @@ public class productFormController {
     }
 
 
-    public void showError(String text) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(text);
-        alert.showAndWait();
+    public void showMessage(String text) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setHeaderText(null);
+            alert.setContentText(text);
+            alert.showAndWait();
+        });
     }
+
 
     public void closeWindow() throws IOException {
         Stage actualScene = (Stage) tfNombre.getScene().getWindow();

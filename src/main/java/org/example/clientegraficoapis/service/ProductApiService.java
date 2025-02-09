@@ -20,6 +20,6 @@ public interface ProductApiService {
     @DELETE("product")
     Call<Void> deleteProduct(@Body Product product);
 
-    @PUT("product")
-    Call<Product> updateProduct(@Body Product product);
+    @PUT("product/{id}")
+    Call<Product> updateProduct(@Path("id") int id, @Body Product product);
 }

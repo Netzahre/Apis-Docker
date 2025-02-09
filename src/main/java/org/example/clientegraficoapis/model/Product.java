@@ -26,8 +26,8 @@ public class Product {
         return idProduct;
     }
 
-    public void setId(int id) {
-        this.idProduct = id;
+    public void setId(int idProduct) {
+        this.idProduct = idProduct;
     }
 
     public String getName() {

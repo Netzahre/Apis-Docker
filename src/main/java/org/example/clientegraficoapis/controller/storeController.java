@@ -1,5 +1,6 @@
 package org.example.clientegraficoapis.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -37,6 +38,16 @@ public class storeController {
     private Button modButton;
     @FXML
     private Button deleteButton;
+    @FXML
+    private Button filterButton;
+    @FXML
+    private TextField filterTFName;
+
+    @FXML
+    private Spinner<Integer> spinnerMinPrice;
+
+    @FXML
+    private Spinner<Integer> spinnerMaxPrice;
 
 
     private ProductApiService apiService;
@@ -211,4 +222,48 @@ public class storeController {
             });
         }
     }
+    @FXML
+    public void filter() {
+        // Recoger el criterio de filtrado para el nombre (se trimea para evitar espacios en blanco)
+        String nameFilter = filterTFName.getText().trim();
+
+        // Recoger los valores de precio mínimo y máximo desde los Spinners
+        // Si no se han modificado, se envían como null
+        Double minPrice = (spinnerMinPrice.getValue() != null) ? spinnerMinPrice.getValue().doubleValue() : null;
+        Double maxPrice = (spinnerMaxPrice.getValue() != null) ? spinnerMaxPrice.getValue().doubleValue() : null;
+
+        // Si no se especifica ningún filtro, se recargan todos los productos
+        if (nameFilter.isEmpty() && minPrice == null && maxPrice == null) {
+            loadProducts();
+            return;
+        }
+
+        // Llamada al endpoint de filtrado. Se envían null para los parámetros que no se hayan definido.
+        Call<List<Product>> call = apiService.getProductsFilter(
+                nameFilter.isEmpty() ? null : nameFilter,
+                minPrice,
+                maxPrice
+        );
+
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> products = response.body();
+                    Platform.runLater(() -> {
+                        tvProducts.getItems().clear();
+                        tvProducts.getItems().addAll(products);
+                    });
+                } else {
+                    Platform.runLater(() -> showError("No se encontraron productos con esos filtros."));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Platform.runLater(() -> showError("Error al filtrar productos: " + t.getMessage()));
+            }
+        });
+    }
+
 }

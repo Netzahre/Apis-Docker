@@ -59,7 +59,8 @@ public class singInController {
                 if (response.isSuccessful()) {
                     Platform.runLater(() -> {
                         try {
-                            Stage stage = new Stage();
+                            Stage stage = (Stage) tfUser.getScene().getWindow();
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/login.fxml"));
                             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/org/example/clientegraficoapis/login.fxml"))));
                             stage.setTitle("Amazon't log-in");
                             stage.show();

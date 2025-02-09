@@ -56,7 +56,7 @@ public class storeController {
     }
 
     private void startTable() {
-        idProduct.setCellValueFactory(new PropertyValueFactory<>("idProduct"));
+        idProduct.setCellValueFactory(new PropertyValueFactory<>("id"));
         productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         productDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -125,8 +125,6 @@ public class storeController {
                 System.out.println("Ha ocurrido un error: " + t.getMessage());
             }
         });
-
-
     }
 
     public void processPurchase(int numProducts, double total) {
@@ -169,6 +167,8 @@ public class storeController {
             showError("Seleccione un único producto.");
             System.out.println("Seleccione un único producto.");
         }
+        loadProducts();
+
     }
 
     @FXML
@@ -178,8 +178,7 @@ public class storeController {
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setTitle("crear producto Amazon't");
-
-
+        loadProducts();
     }
 
     @FXML
@@ -191,7 +190,7 @@ public class storeController {
             return;
         }
         for (Product product : selectedProducts) {
-            Call<ResponseBody> call = apiService.deleteProduct(product.getIdProduct());
+            Call<ResponseBody> call = apiService.deleteProduct(product.getId());
             call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

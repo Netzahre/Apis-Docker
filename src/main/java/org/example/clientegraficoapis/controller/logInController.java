@@ -77,7 +77,7 @@ public class logInController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/signin.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
-            stage.setTitle("Registro Amazon't");
+            stage.setTitle("Amazon't Registro");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

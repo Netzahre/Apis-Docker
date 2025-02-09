@@ -14,6 +14,8 @@ module org.example.clientegraficoapis {
     requires retrofit2.converter.gson;
     requires org.apache.commons.net;
     requires com.fasterxml.jackson.annotation;
+    requires okhttp3;
+    requires com.google.gson;
 
     opens org.example.clientegraficoapis.model;
     opens org.example.clientegraficoapis.service to javafx.fxml;

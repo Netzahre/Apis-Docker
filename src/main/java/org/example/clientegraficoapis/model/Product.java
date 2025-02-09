@@ -1,9 +1,12 @@
 package org.example.clientegraficoapis.model;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Product {
+    @SerializedName("id")
     private Integer idProduct;
 
     private String name;
@@ -23,12 +26,12 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getIdProduct() {
+    public Integer getId() {
         return idProduct;
     }
 
 
-    public void setIdProduct(Integer idProduct) {
+    public void setId(Integer idProduct) {
         this.idProduct = idProduct;
     }
 

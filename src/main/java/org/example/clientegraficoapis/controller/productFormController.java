@@ -82,7 +82,7 @@ public class productFormController {
             }
         } else {
             updateProduct();
-            Call<Product> call = apiService.updateProduct(product.getIdProduct(), product);
+            Call<Product> call = apiService.updateProduct(product.getId(), product);
             call.enqueue(new Callback<Product>() {
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {

@@ -75,8 +75,8 @@ public class storeController {
     }
 
     //REVISAR, PEGADO DE GEPETO
-    public void procesarCompra(String username, int numProductos, double total) {
-        boolean resultado = ftpService.savePurchase(username, numProductos, total);
+    public void procesarCompra(int numProductos, double total) {
+        boolean resultado = ftpService.savePurchase(numProductos, total);
         if (resultado) {
             System.out.println("Compra registrada en FTP correctamente.");
         } else {

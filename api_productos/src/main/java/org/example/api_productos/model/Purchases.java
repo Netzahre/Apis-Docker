@@ -1,6 +1,7 @@
 package org.example.api_productos.model;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity

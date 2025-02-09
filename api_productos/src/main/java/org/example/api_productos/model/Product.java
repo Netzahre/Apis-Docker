@@ -1,13 +1,14 @@
 package org.example.api_productos.model;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idProduct;
+    private Integer idProduct;
 
     @Column(name = "nombre")
     private String name;
@@ -28,17 +29,18 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String description, double price) {
+    public Product(Integer id, String name, String description, double price) {
+        this.idProduct = id;
         this.name = name;
         this.description = description;
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getId() {
         return idProduct;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.idProduct = id;
     }
 

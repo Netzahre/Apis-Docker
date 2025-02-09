@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
         private static final int PORT = 21;
         private static final String USER = "user";
         private static final String PASSWORD = "user";
-        private static final String REMOTE_DIRECTORY = "/compras/";  
+        private static final String REMOTE_DIRECTORY = "/compras/";
 
         private FTPClient ftpClient;
 

@@ -2,12 +2,11 @@ package org.example.clientegraficoapis.service;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.example.clientegraficoapis.session.Session;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static org.example.clientegraficoapis.Main.currentUser;
 
 public class FTPService {
         private static final String SERVER = "localhost";  // Cambia esto si tu servidor FTP está en otra dirección
@@ -60,8 +59,7 @@ public class FTPService {
                 System.out.println("Error al conectar con el servidor FTP");
                 return false;
             }
-
-            String fileName = REMOTE_DIRECTORY + currentUser.getUsername() + "_compras.txt";
+            String fileName = REMOTE_DIRECTORY + Session.getName() + "_compras.txt";
             String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String registro = fechaHora + " - Productos: " + numProductos + " - Total: " + total + "€\n";
 

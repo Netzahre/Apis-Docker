@@ -72,6 +72,7 @@ public class storeController {
         if (product != null) {
             System.out.println("Comprando: " + product.getName());
         }
+
     }
 
     //REVISAR, PEGADO DE GEPETO

@@ -16,6 +16,10 @@ public class Session {
     public static void clear() {
         loggedUser = null;
     }
+
+    public static String getName(){
+        return loggedUser.getUsername();
+    }
 }
 
 

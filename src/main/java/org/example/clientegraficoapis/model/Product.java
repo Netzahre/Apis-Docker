@@ -1,8 +1,10 @@
 package org.example.clientegraficoapis.model;
 
 
+import java.util.List;
+
 public class Product {
-    private int id;
+    private int idProduct;
 
     private String name;
 
@@ -10,22 +12,22 @@ public class Product {
 
     private double price;
 
-    public Product() {
-    }
+    private List<Purchases> purchases;
 
-    public Product(int id, String name, String description, double price) {
-        this.id = id;
+    public Product() {}
+
+    public Product(String name, String description, double price) {
         this.name = name;
         this.description = description;
         this.price = price;
     }
 
     public int getId() {
-        return id;
+        return idProduct;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idProduct = id;
     }
 
     public String getName() {
@@ -50,5 +52,13 @@ public class Product {
 
     public void setPrice(double precio) {
         this.price = precio;
+    }
+
+    public List<Purchases> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchases> purchases) {
+        this.purchases = purchases;
     }
 }

@@ -10,9 +10,9 @@ public class Purchases {
 
     private List<Product> productList;
 
-    public Purchases(){}
+    public Purchases() {}
 
-    public Purchases(String purchaser, List<Product> products){
+    public Purchases(String purchaser, List<Product> products) {
         this.purchaser = purchaser;
         this.productList = products;
     }
@@ -40,5 +40,4 @@ public class Purchases {
     public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
-
 }

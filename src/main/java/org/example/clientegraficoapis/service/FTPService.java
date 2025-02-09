@@ -7,12 +7,14 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-    public class FTPService {
+import static org.example.clientegraficoapis.Main.currentUser;
+
+public class FTPService {
         private static final String SERVER = "localhost";  // Cambia esto si tu servidor FTP está en otra dirección
         private static final int PORT = 21;
         private static final String USER = "user";
         private static final String PASSWORD = "user";
-        private static final String REMOTE_DIRECTORY = "/compras/";  
+        private static final String REMOTE_DIRECTORY = "/clientsPurchases/";
 
         private FTPClient ftpClient;
 
@@ -53,13 +55,13 @@ import java.time.format.DateTimeFormatter;
         /**
          * Guardar una compra en el archivo FTP correspondiente
          */
-        public boolean savePurchase(String username, int numProductos, double total) {
+        public boolean savePurchase( int numProductos, double total) {
             if (!connect()) {
                 System.out.println("Error al conectar con el servidor FTP");
                 return false;
             }
 
-            String fileName = REMOTE_DIRECTORY + username + "_compras.txt";
+            String fileName = REMOTE_DIRECTORY + currentUser.getUsername() + "_compras.txt";
             String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String registro = fechaHora + " - Productos: " + numProductos + " - Total: " + total + "€\n";
 

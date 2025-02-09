@@ -1,0 +1,150 @@
+.root {
+    -fx-background-color: #f3f3f3;
+    -fx-font-family: Arial, sans-serif;
+}
+
+.nav-bar {
+    -fx-background-color: #232f3e;
+    -fx-padding: 10px;
+}
+
+.nav-bar .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.button-amazon {
+    -fx-background-color: #ffd814;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+}
+
+.button-amazon:hover {
+    -fx-background-color: #f7ca00;
+}
+
+.button-amazon:pressed {
+    -fx-background-color: #e6b800;
+}
+
+.button-modify {
+    -fx-background-color: #007acc;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+}
+
+.button-modify:hover {
+    -fx-background-color: #179bf6;
+}
+
+.button-modify:pressed {
+    -fx-background-color: #00497a;
+}
+
+.button-create {
+    -fx-background-color: #50BA54;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+}
+
+.button-create:hover {
+    -fx-background-color: #72dd76;
+}
+
+.button-create:pressed {
+    -fx-background-color: #2d8130;
+}
+
+.button-delete {
+    -fx-background-color: #DE534A;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+}
+
+.button-delete:hover {
+    -fx-background-color: #ff7870;
+}
+
+.button-delete:pressed {
+    -fx-background-color: #b53830;
+}
+
+.button-buy {
+    -fx-background-color: #ff9900;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+}
+
+.button-buy:hover {
+    -fx-background-color: #e68a00;
+}
+
+.button-buy:pressed {
+    -fx-background-color: #cc7700;
+}
+
+.label-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111;
+}
+
+.label-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555;
+}
+
+.text-field {
+    -fx-border-color: #d5d9d9;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-border-color: #ffa41c;
+}
+
+.check-box {
+    -fx-font-size: 14px;
+    -fx-text-fill: #111;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #d5d9d9;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-padding: 3px;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #ffa41c;
+    -fx-border-color: #ffa41c;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}

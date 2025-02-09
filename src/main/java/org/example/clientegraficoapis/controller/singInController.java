@@ -67,9 +67,11 @@ public class singInController {
     }
     @FXML
     public void atras() throws IOException {
+        Stage actualScene = (Stage) cbAdmin.getScene().getWindow();
         Stage stage = new Stage();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/org/example/clientegraficoapis/login.fxml"))));
         stage.setTitle("Amazon't log-in");
+        actualScene.close();
         stage.show();
     }
 

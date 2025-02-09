@@ -63,7 +63,7 @@
                                 <Font size="28.0" />
                             </font>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Atras">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Atras" onAction="#atras">
                             <font>
                                 <Font size="28.0" />
                             </font>

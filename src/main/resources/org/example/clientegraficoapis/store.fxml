@@ -46,7 +46,7 @@
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="deleteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="182.0" styleClass="button-delete" text="Borrar Producto">
+                <Button fx:id="deleteButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="43.0" prefWidth="182.0" styleClass="button-delete" text="Borrar Producto">
                     <font>
                         <Font size="20.0" />
                     </font>

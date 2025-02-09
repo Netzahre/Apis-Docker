@@ -4,7 +4,7 @@ package org.example.clientegraficoapis.model;
 import java.util.List;
 
 public class Product {
-    private int idProduct;
+    private Integer idProduct;
 
     private String name;
 
@@ -16,17 +16,19 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String description, double price) {
+    public Product(Integer id, String name, String description, double price) {
+        this.idProduct = id;
         this.name = name;
         this.description = description;
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getIdProduct() {
         return idProduct;
     }
 
-    public void setId(int idProduct) {
+
+    public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
     }
 

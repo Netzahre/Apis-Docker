@@ -1,5 +1,6 @@
 package org.example.clientegraficoapis.service;
 
+import okhttp3.ResponseBody;
 import org.example.clientegraficoapis.model.Product;
 import org.example.clientegraficoapis.model.Purchases;
 import retrofit2.Call;
@@ -18,8 +19,8 @@ public interface ProductApiService {
     Call<Product> createProduct(@Body Product product);
 
     @DELETE("product")
-    Call<Void> deleteProduct(@Body Product product);
+    Call<ResponseBody> deleteProduct(@Path("id") Integer id);
 
     @PUT("product/{id}")
-    Call<Product> updateProduct(@Path("id") int id, @Body Product product);
+    Call<Product> updateProduct(@Path("id") Integer id, @Body Product product);
 }

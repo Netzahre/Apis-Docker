@@ -13,6 +13,7 @@ module org.example.clientegraficoapis {
     requires retrofit2;
     requires retrofit2.converter.gson;
     requires org.apache.commons.net;
+    requires okhttp3;
 
     opens org.example.clientegraficoapis.model;
     opens org.example.clientegraficoapis.service to javafx.fxml;

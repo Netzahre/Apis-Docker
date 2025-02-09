@@ -84,7 +84,7 @@ public class productFormController {
             }
         } else {
             updateProduct();
-            Call<Product> call = apiService.updateProduct(product.getId(), product);
+            Call<Product> call = apiService.updateProduct(product.getIdProduct(), product);
             call.enqueue(new Callback<Product>() {
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {
@@ -95,7 +95,7 @@ public class productFormController {
 
                         } else {
                             showMessage("Error al actualizar el producto");
-                            System.out.println("Error al actualizar producto 2");
+                            System.out.println("Error al actualizar producto");
                         }
                     });
                 }
@@ -103,7 +103,7 @@ public class productFormController {
                 @Override
                 public void onFailure(Call<Product> call, Throwable throwable) {
                     showMessage("Error al actualizar el producto");
-                    System.out.println("Error al actualizar producto 3");
+                    System.out.println("Error al actualizar producto");
                 }
             });
             closeWindow();

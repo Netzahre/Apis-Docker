@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FTPService {
-        private static final String SERVER = "127.0.0.1";  // Cambia esto si tu servidor FTP está en otra dirección
+        private static final String SERVER = "127.0.0.1";
         private static final int PORT = 21;
         private static final String USER = "user";
         private static final String PASSWORD = "user";

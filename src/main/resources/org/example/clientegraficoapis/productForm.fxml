@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="464.0" stylesheets="@../../../css/amazon.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.clientegraficoapis.controller.singInController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="464.0" stylesheets="@../../../css/amazon.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.clientegraficoapis.controller.productFormController">
     <children>
         <AnchorPane prefHeight="28.0" prefWidth="464.0">
             <children>
@@ -61,12 +61,12 @@
             </VBox>
                 <VBox alignment="TOP_CENTER" prefHeight="88.0" prefWidth="464.0" spacing="15.0">
                     <children>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signIn" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Confirmar">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#productManager" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Confirmar">
                             <font>
                                 <Font size="28.0" />
                             </font>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Cancelar">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeWindow" prefHeight="40.0" prefWidth="154.0" styleClass="button-amazon" text="Cancelar">
                             <font>
                                 <Font size="28.0" />
                             </font>

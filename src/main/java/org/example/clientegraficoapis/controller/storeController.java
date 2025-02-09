@@ -92,7 +92,7 @@ public class storeController {
 
         System.out.println("🛒 Productos comprados:");
         StringBuilder purchasedProducts = new StringBuilder();
-        purchasedProducts.append("Ha comprado: "+"\n");
+        purchasedProducts.append("Ha comprado: " + "\n");
         for (Product product : selectedProducts) {
             System.out.println("- " + product.getName() + " (Precio: " + product.getPrice() + ")");
             purchasedProducts.append(product.getName()).append(" (Precio: ").append(product.getPrice()).append(")").append("\n");
@@ -128,7 +128,6 @@ public class storeController {
 
     }
 
-    //REVISAR, PEGADO DE GEPETO
     public void processPurchase(int numProducts, double total) {
         boolean resultado = ftpService.savePurchase(numProducts, total);
         if (resultado) {
@@ -155,12 +154,28 @@ public class storeController {
     }
 
     @FXML
+    public void openModifyProduct() throws IOException {
+        Stage stage = (Stage) tvProducts.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/productForm.fxml"));
+
+        if (tvProducts.getSelectionModel().getSelectedItems().size() == 1) {
+            productFormController controller = loader.getController();
+            controller.setProduct(tvProducts.getSelectionModel().getSelectedItem());
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Modificar producto de Amazon't");
+        } else {
+            showError("Seleccione un único producto.");
+            System.out.println("Seleccione un único producto.");
+        }
+    }
+
+    @FXML
     public void openCreateProduct() throws IOException {
         Stage stage = (Stage) tvProducts.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/productForm.fxml"));
-        //Pasar el producto
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
-        stage.setTitle("crear producto Amazon't");
+        stage.setTitle("crear producto de Amazon't");
     }
 }

@@ -44,12 +44,12 @@
         <Label layoutX="488.0" layoutY="89.0" style="-fx-font-size: 60;" styleClass="label-title" text="Productos" />
         <VBox layoutX="1049.0" layoutY="89.0" spacing="20.0">
             <children>
-                <Button fx:id="createButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="182.0" styleClass="button-create" text="Crear Producto">
+                <Button fx:id="createButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="182.0" styleClass="button-create" text="Crear Producto" onAction="#openCreateProduct">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button fx:id="modButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="182.0" styleClass="button-modify" text="Modificar Producto">
+                <Button fx:id="modButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="182.0" styleClass="button-modify" text="Modificar Producto" onAction="#openModifyProduct">
                     <font>
                         <Font size="20.0" />
                     </font>

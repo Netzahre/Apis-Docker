@@ -1,6 +1,7 @@
 package org.example.api_productos.controller;
 
 import org.example.api_productos.model.Purchases;
+import org.example.api_productos.repository.ProductRepository;
 import org.example.api_productos.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,24 +1,32 @@
 package org.example.api_productos.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class Product {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProduct;
 
-    @Column (name = "nombre")
+    @Column(name = "nombre")
     private String name;
 
-    @Column (name = "descripcion")
+    @Column(name = "descripcion")
     private String description;
 
-    @Column (name = "precio")
+    @Column(name = "precio")
     private double price;
 
-    public Product() {
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "purchase_product", // Nombre de la tabla intermedia
+            joinColumns = @JoinColumn(name = "product_id"), // Clave foránea que referencia a Product
+            inverseJoinColumns = @JoinColumn(name = "purchase_id") // Clave foránea que referencia a Purchases
+    )
+    private List<Purchases> purchases;
+
+    public Product() {}
 
     public Product(String name, String description, double price) {
         this.name = name;
@@ -56,5 +64,13 @@ public class Product {
 
     public void setPrice(double precio) {
         this.price = precio;
+    }
+
+    public List<Purchases> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchases> purchases) {
+        this.purchases = purchases;
     }
 }

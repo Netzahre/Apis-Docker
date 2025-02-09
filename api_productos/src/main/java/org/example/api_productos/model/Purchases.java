@@ -1,25 +1,24 @@
 package org.example.api_productos.model;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
 public class Purchases {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPurchase;
 
-    @Column (name = "purchaser")
+    @Column(name = "purchaser")
     private String purchaser;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "purchase_id")
-    private List<Product> productList;
+    // La lista de productos ya no tiene relación directa con ManyToMany
+    @Transient
+    private transient List<Product> productList;
 
-    public Purchases(){}
+    public Purchases() {}
 
-    public Purchases(String purchaser,List<Product> products){
+    public Purchases(String purchaser, List<Product> products) {
         this.purchaser = purchaser;
         this.productList = products;
     }
@@ -47,5 +46,4 @@ public class Purchases {
     public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
-
 }

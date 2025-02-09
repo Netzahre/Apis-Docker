@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.Optional;
 
 @RestController
@@ -17,10 +18,13 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("user")
-    public ResponseEntity<?> getUser(@RequestParam(name = "username") String nameInput, @RequestParam(name ="password") byte[] passwordInput) {
-        Optional<User> userInput = userRepository.findByUsernameAndPassword(nameInput, passwordInput);
+    public ResponseEntity<?> getUser(@RequestParam(name = "username") String nameInput,
+                                     @RequestParam(name = "password") String passwordInputBase64) {
+        // Aquí se compara directamente el String recibido con el valor almacenado en la BD
+        Optional<User> userInput = userRepository.findByUsernameAndPassword(nameInput, passwordInputBase64);
         if (userInput.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario no existe o la contraseña esta erronea");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El usuario no existe o la contraseña está errónea");
         } else {
             return ResponseEntity.ok(userInput.get());
         }

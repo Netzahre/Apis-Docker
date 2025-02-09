@@ -20,9 +20,9 @@ public class Product {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "purchase_product", // Nombre de la tabla intermedia
-            joinColumns = @JoinColumn(name = "product_id"), // Clave foránea que referencia a Product
-            inverseJoinColumns = @JoinColumn(name = "purchase_id") // Clave foránea que referencia a Purchases
+            name = "purchase_product",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "purchase_id")
     )
     private List<Purchases> purchases;
 

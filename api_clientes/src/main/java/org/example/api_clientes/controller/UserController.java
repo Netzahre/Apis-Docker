@@ -20,7 +20,7 @@ public class UserController {
     @GetMapping("user")
     public ResponseEntity<?> getUser(@RequestParam(name = "username") String nameInput,
                                      @RequestParam(name = "password") String passwordInputBase64) {
-        // Aquí se compara directamente el String recibido con el valor almacenado en la BD
+
         Optional<User> userInput = userRepository.findByUsernameAndPassword(nameInput, passwordInputBase64);
         if (userInput.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

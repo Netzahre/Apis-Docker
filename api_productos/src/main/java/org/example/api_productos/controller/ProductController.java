@@ -4,7 +4,6 @@ package org.example.api_productos.controller;
 import org.example.api_productos.model.Product;
 import org.example.api_productos.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,8 +56,6 @@ public class ProductController {
         }
     }
 
-
-    @GetMapping("/{}")
 
     @PostMapping
     public ResponseEntity<?> newProduct(@RequestBody Product product){

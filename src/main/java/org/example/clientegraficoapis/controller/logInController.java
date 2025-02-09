@@ -16,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -36,14 +37,11 @@ public class logInController {
     public void login() throws NoSuchAlgorithmException {
         String user = tfUser.getText();
         String passSinCifrar = pfPassword.getText();
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] passwordBytes = md.digest(passSinCifrar.getBytes(StandardCharsets.UTF_8));
+        String passwordEncrypted = Base64.getEncoder().encodeToString(passwordBytes);
 
-        MessageDigest cifrado = MessageDigest.getInstance("MD5");
-        cifrado.update(passSinCifrar.getBytes());
-        byte[] passwordBytes = cifrado.digest();
-
-        String passwordBase64 = Base64.getEncoder().encodeToString(passwordBytes);
-
-        Call<User> call = apiService.logIn(user, passwordBase64);
+        Call<User> call = apiService.logIn(user, passwordEncrypted);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

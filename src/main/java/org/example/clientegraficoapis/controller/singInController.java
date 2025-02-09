@@ -51,7 +51,7 @@ public class singInController {
         String passwordEncrypted = Base64.getEncoder().encodeToString(passwordBytes);
 
         user.setPassword(passwordEncrypted);
-        ;
+
         Call<User> call = apiService.signIn(user);
         call.enqueue(new Callback<>() {
             @Override

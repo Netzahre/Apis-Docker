@@ -148,3 +148,28 @@
 .check-box:selected .mark {
     -fx-background-color: white;
 }
+
+.spinner {
+    -fx-border-color: #d5d9d9;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-background-color: white;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: #f0f2f2;
+    -fx-border-color: #d5d9d9;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #e3e6e6;
+}
+
+.spinner .increment-arrow-button:pressed,
+.spinner .decrement-arrow-button:pressed {
+    -fx-background-color: #cfd1d1;
+}

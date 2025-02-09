@@ -1,11 +1,11 @@
 package org.example.clientegraficoapis.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.example.clientegraficoapis.model.Product;
 import org.example.clientegraficoapis.model.Purchases;
 import org.example.clientegraficoapis.service.*;
@@ -15,6 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+import java.io.IOException;
 import java.util.List;
 
 public class storeController {
@@ -29,9 +30,16 @@ public class storeController {
     private TableColumn<Product, String> productDescription;
     @FXML
     private TableColumn<Product, Double> productPrice;
+    @FXML
+    private Button createButton;
+    @FXML
+    private Button modButton;
+    @FXML
+    private Button deleteButton;
+
 
     private ProductApiService apiService;
-    private FTPService ftpService = new FTPService();
+    private final FTPService ftpService = new FTPService();
 
     @FXML
     public void initialize() {
@@ -39,6 +47,11 @@ public class storeController {
         apiService = RetrofitProduct.getClient().create(ProductApiService.class);
         tvProducts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         loadProducts();
+        if (!Session.getLoggedUser().getIsAdmin()) {
+            createButton.setVisible(false);
+            modButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }
     }
 
     private void startTable() {
@@ -62,7 +75,7 @@ public class storeController {
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                t.printStackTrace();
+                System.out.println("Ha ocurrido un error: " + t.getMessage());
             }
         });
     }
@@ -82,7 +95,7 @@ public class storeController {
         purchasedProducts.append("Ha comprado: "+"\n");
         for (Product product : selectedProducts) {
             System.out.println("- " + product.getName() + " (Precio: " + product.getPrice() + ")");
-            purchasedProducts.append(product.getName() +" (Precio: " + product.getPrice() + ")" + "\n");
+            purchasedProducts.append(product.getName()).append(" (Precio: ").append(product.getPrice()).append(")").append("\n");
         }
 
         //Añadido, comprobar.
@@ -108,7 +121,7 @@ public class storeController {
 
             @Override
             public void onFailure(Call<Purchases> call, Throwable t) {
-                t.printStackTrace();
+                System.out.println("Ha ocurrido un error: " + t.getMessage());
             }
         });
 
@@ -139,5 +152,15 @@ public class storeController {
         alert.setHeaderText(null);
         alert.setContentText(text);
         alert.showAndWait();
+    }
+
+    @FXML
+    public void openCreateProduct() throws IOException {
+        Stage stage = (Stage) tvProducts.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/clientegraficoapis/productForm.fxml"));
+        //Pasar el producto
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.setTitle("crear producto Amazon't");
     }
 }

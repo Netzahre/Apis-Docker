@@ -5,6 +5,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.example.clientegraficoapis.session.Session;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -54,41 +55,47 @@ public class FTPService {
         /**
          * Guardar una compra en el archivo FTP correspondiente
          */
-        public boolean savePurchase( int numProductos, double total) {
+        public boolean savePurchase(int numProductos, double total) {
             if (!connect()) {
                 System.out.println("Error al conectar con el servidor FTP");
                 return false;
             }
             System.out.println("Ha conectado al servidor FTP");
+
             String fileName = REMOTE_DIRECTORY + Session.getName() + "_compras.txt";
             String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String registro = fechaHora + " - Productos: " + numProductos + " - Total: " + total + "€\n";
 
+            StringBuilder contenido = new StringBuilder();
+
             try {
-                // Descargar archivo si existe
                 InputStream inputStream = ftpClient.retrieveFileStream(fileName);
-                StringBuilder contenido = new StringBuilder();
-                System.out.println("compruebo el archivo");
                 if (inputStream != null) {
-                    System.out.println("existe!");
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    System.out.println("El archivo existe, leyendo su contenido...");
+                    BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                     String line;
-                    while ((line = reader.readLine()) != null) {
+                    while ((line = br.readLine()) != null) {
                         contenido.append(line).append("\n");
                     }
-                    reader.close();
+                    br.close();
                     inputStream.close();
-                    ftpClient.completePendingCommand(); // Importante para cerrar la conexión de datos
-                } else System.out.println("no existe.");
+                    ftpClient.completePendingCommand();
+                } else {
+                    System.out.println("El archivo no existe, se creará uno nuevo.");
+                }
 
-                // Añadir nueva compra al contenido existente
                 contenido.append(registro);
 
-                // Subir archivo actualizado al servidor
-                InputStream newInputStream = new ByteArrayInputStream(contenido.toString().getBytes());
+                InputStream newInputStream = new ByteArrayInputStream(contenido.toString().getBytes(StandardCharsets.UTF_8));
+
                 boolean done = ftpClient.storeFile(fileName, newInputStream);
                 newInputStream.close();
 
+                if (done) {
+                    System.out.println("Archivo actualizado/subido exitosamente.");
+                } else {
+                    System.out.println("Fallo al subir el archivo.");
+                }
                 disconnect();
                 return done;
             } catch (IOException e) {
@@ -96,4 +103,5 @@ public class FTPService {
                 return false;
             }
         }
-    }
+
+}

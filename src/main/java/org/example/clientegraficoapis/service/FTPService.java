@@ -22,10 +22,11 @@ public class FTPService {
             ftpClient = new FTPClient();
         }
 
-        /**
-         * Conectar al servidor FTP
-         */
-        public boolean connect() {
+    /**
+     * Method to connect to the FTP server
+     * @return true if the connection is successful, false otherwise
+     */
+    public boolean connect() {
             try {
                 ftpClient.connect(SERVER, PORT);
                 ftpClient.login(USER, PASSWORD);
@@ -39,7 +40,7 @@ public class FTPService {
         }
 
         /**
-         * Desconectar del servidor FTP
+         * Method to disconnect from the FTP server
          */
         public void disconnect() {
             try {
@@ -53,7 +54,7 @@ public class FTPService {
         }
 
         /**
-         * Guardar una compra en el archivo FTP correspondiente
+         * Method to save a purchase in the FTP server
          */
         public boolean savePurchase(int numProductos, double total) {
             if (!connect()) {
@@ -62,7 +63,7 @@ public class FTPService {
             }
             System.out.println("Ha conectado al servidor FTP");
 
-            String fileName = REMOTE_DIRECTORY + "_" + Session.getName() + "_compras.txt";
+            String fileName = REMOTE_DIRECTORY + "_" + Session.getLoggedUser().getUsername() + "_compras.txt";
             String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             String registro = fechaHora + " - Productos: " + numProductos + " - Total: " + total + "€\n";
 

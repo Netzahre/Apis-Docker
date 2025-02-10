@@ -21,24 +21,31 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+
 public class logInController {
-
-
     private UserApiService apiService;
     @FXML private TextField tfUser;
     @FXML private PasswordField pfPassword;
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     public void initialize() {
         apiService = RetrofitClient.getClient().create(UserApiService.class);
     }
 
+    /**
+     * Method executed when the login button is pressed.
+     * It sends a request to the server to log in.
+     * If the login is successful, it opens the store window.
+     */
     @FXML
     public void login() throws NoSuchAlgorithmException {
         String user = tfUser.getText();
-        String passSinCifrar = pfPassword.getText();
+        String plaintextPassword = pfPassword.getText();
         MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] passwordBytes = md.digest(passSinCifrar.getBytes(StandardCharsets.UTF_8));
+        byte[] passwordBytes = md.digest(plaintextPassword.getBytes(StandardCharsets.UTF_8));
         String passwordEncrypted = Base64.getEncoder().encodeToString(passwordBytes);
 
         Call<User> call = apiService.logIn(user, passwordEncrypted);
@@ -70,6 +77,10 @@ public class logInController {
         });
     }
 
+    /**
+     * Method executed when the sign in button is pressed.
+     * It opens the sign in window.
+     */
     @FXML
     public void signIn() {
         try {
@@ -83,8 +94,12 @@ public class logInController {
         }
     }
 
+    /**
+     * Method executed when the exit button is pressed.
+     * It closes the application.
+     */
     @FXML
-    public void salir() {
+    public void exit() {
         System.exit(0);
     }
 

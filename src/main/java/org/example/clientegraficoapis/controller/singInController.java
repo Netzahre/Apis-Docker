@@ -32,22 +32,27 @@ public class singInController {
     @FXML
     private CheckBox cbAdmin;
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     public void initialize() {
         apiService = RetrofitClient.getClient().create(UserApiService.class);
     }
 
+    /**
+     * Method to sign in
+     */
     @FXML
     public void signIn() throws NoSuchAlgorithmException {
         User user = new User();
         user.setUsername(tfUser.getText());
         user.setIsAdmin(cbAdmin.isSelected());
 
-        String passSinCifrar = pfPassword.getText();
-
+        String plaintextPassword = pfPassword.getText();
         MessageDigest cifrado = MessageDigest.getInstance("SHA-256");
 
-        byte[] passwordBytes = cifrado.digest(passSinCifrar.getBytes(StandardCharsets.UTF_8));
+        byte[] passwordBytes = cifrado.digest(plaintextPassword.getBytes(StandardCharsets.UTF_8));
         String passwordEncrypted = Base64.getEncoder().encodeToString(passwordBytes);
 
         user.setPassword(passwordEncrypted);
@@ -76,6 +81,10 @@ public class singInController {
             }
         });
     }
+
+    /**
+     * Method to go back to the login screen
+     */
     @FXML
     public void back() throws IOException {
         Stage actualScene = (Stage) cbAdmin.getScene().getWindow();

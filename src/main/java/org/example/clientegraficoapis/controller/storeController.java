@@ -43,7 +43,6 @@ public class storeController {
 
     @FXML
     private Spinner<Integer> spinnerMinPrice;
-
     @FXML
     private Spinner<Integer> spinnerMaxPrice;
 
@@ -51,6 +50,9 @@ public class storeController {
     private ProductApiService apiService;
     private final FTPService ftpService = new FTPService();
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     public void initialize() {
         startTable();
@@ -66,6 +68,9 @@ public class storeController {
         spinnerMaxPrice.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
     }
 
+    /**
+     * Initializes the table columns.
+     */
     private void startTable() {
         idProduct.setCellValueFactory(new PropertyValueFactory<>("id"));
         productName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -73,6 +78,9 @@ public class storeController {
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    /**
+     * Load the products from the API and set them in the table.
+     */
     private void loadProducts() {
         Call<List<Product>> call = apiService.getProducts();
         call.enqueue(new Callback<>() {
@@ -92,6 +100,9 @@ public class storeController {
         });
     }
 
+    /**
+     * Buy the selected products.
+     */
     @FXML
     protected void buy() {
         List<Product> selectedProducts = tvProducts.getSelectionModel().getSelectedItems();
@@ -134,6 +145,12 @@ public class storeController {
         });
     }
 
+    /**
+     * Process the purchase.
+     *
+     * @param numProducts Number of products.
+     * @param total       Total price.
+     */
     public void processPurchase(int numProducts, double total) {
         boolean resultado = ftpService.savePurchase(numProducts, total);
         if (resultado) {
@@ -143,6 +160,12 @@ public class storeController {
         }
     }
 
+    /**
+     * Calculate the total price of the selected products.
+     *
+     * @param selectedProducts Selected products.
+     * @return Total price.
+     */
     private double calculateTotalPrice(List<Product> selectedProducts) {
         double total = 0;
         for (Product product : selectedProducts) {
@@ -151,6 +174,11 @@ public class storeController {
         return total;
     }
 
+    /**
+     * Show an error dialog.
+     *
+     * @param text Error message.
+     */
     public static void showError(String text) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -159,6 +187,11 @@ public class storeController {
         alert.showAndWait();
     }
 
+    /**
+     * Open the modify product form.
+     *
+     * @throws IOException If an error occurs.
+     */
     @FXML
     public void openModifyProduct() throws IOException {
         Stage stage = (Stage) tvProducts.getScene().getWindow();
@@ -179,6 +212,11 @@ public class storeController {
 
     }
 
+    /**
+     * Open the create product form.
+     *
+     * @throws IOException If an error occurs.
+     */
     @FXML
     public void openCreateProduct() throws IOException {
         Stage stage = (Stage) tvProducts.getScene().getWindow();
@@ -189,6 +227,9 @@ public class storeController {
         loadProducts();
     }
 
+    /**
+     * Delete the selected products.
+     */
     @FXML
     public void deleteProduct() {
         List<Product> selectedProducts = tvProducts.getSelectionModel().getSelectedItems();
@@ -220,6 +261,10 @@ public class storeController {
             });
         }
     }
+
+    /**
+     * Filter the products.
+     */
     @FXML
     public void filter() {
         String nameFilter = filterTFName.getText().trim();

@@ -76,7 +76,7 @@
                             </font>
                         </Button>
                         <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0"
-                                prefWidth="154.0" styleClass="button-amazon" text="Salir" onAction="#salir">
+                                prefWidth="154.0" styleClass="button-amazon" text="Salir" onAction="#exit">
                             <font>
                                 <Font size="28.0"/>
                             </font>

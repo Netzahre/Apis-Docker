@@ -8,6 +8,10 @@ public class RetrofitProduct {
     private static final String BASE_URL = "http://localhost:8081/";
     private static Retrofit retrofit = null;
 
+    /**
+     * Method to get the Retrofit client
+     * @return the Retrofit client
+     */
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()

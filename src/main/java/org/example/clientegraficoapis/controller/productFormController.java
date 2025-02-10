@@ -29,6 +29,9 @@ public class productFormController {
     private ProductApiService apiService;
     private Product product;
 
+    /**
+     * Initializes the controller class.
+     */
     public void initialize() {
         tfNombre.setText("");
         tfDesc.setText("");
@@ -46,6 +49,11 @@ public class productFormController {
         apiService = RetrofitProduct.getClient().create(ProductApiService.class);
     }
 
+    /**
+     * Sets the product to be edited in the form
+     *
+     * @param product the product to be edited
+     */
     public void setProduct(Product product) {
         this.product = product;
         tfNombre.setText(product.getName());
@@ -53,6 +61,11 @@ public class productFormController {
         tfPrecio.setText(String.valueOf(product.getPrice()));
     }
 
+    /**
+     * Handles the action of the user clicking the "Guardar" button
+     * If the product is null, it creates a new product
+     * If the product is not null, it updates the product
+     */
     @FXML
     public void productManager() throws IOException {
         if (product == null) {
@@ -109,6 +122,11 @@ public class productFormController {
         }
     }
 
+    /**
+     * Creates a new product with the data entered by the user
+     *
+     * @return true if the product was created, false if there are empty fields
+     */
     private boolean createProduct() {
         if (tfNombre.getText().isEmpty() || tfDesc.getText().isEmpty() || tfPrecio.getText().isEmpty()) {
             showMessage("No pueden existir campos vacios");
@@ -121,6 +139,9 @@ public class productFormController {
         return true;
     }
 
+    /**
+     * Updates the product with the data entered by the user
+     */
     private void updateProduct() {
         product.setName(tfNombre.getText());
         product.setDescription(tfDesc.getText());
@@ -128,6 +149,11 @@ public class productFormController {
     }
 
 
+    /**
+     * Shows a message to the user
+     *
+     * @param text the message to be shown
+     */
     public void showMessage(String text) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -139,6 +165,9 @@ public class productFormController {
     }
 
 
+    /**
+     * Closes the current window and opens the store window
+     */
     public void closeWindow() throws IOException {
         Stage actualScene = (Stage) tfNombre.getScene().getWindow();
         Stage stage = new Stage();

@@ -33,7 +33,7 @@ public class FTPService {
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
                 return true;
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Error al conectar con el servidor FTP" + e.getMessage());
                 return false;
             }
         }

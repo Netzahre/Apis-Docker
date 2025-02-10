@@ -16,7 +16,7 @@ public class FTPService {
         private static final String PASSWORD = "user";
         private static final String REMOTE_DIRECTORY = "/purchases";
 
-        private FTPClient ftpClient;
+        private final FTPClient ftpClient;
 
         public FTPService() {
             ftpClient = new FTPClient();
@@ -48,7 +48,7 @@ public class FTPService {
                     ftpClient.disconnect();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Error al desconectar del servidor FTP" + e.getMessage());
             }
         }
 
@@ -99,7 +99,7 @@ public class FTPService {
                 disconnect();
                 return done;
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Error al guardar la compra en el servidor FTP" + e.getMessage());
                 return false;
             }
         }

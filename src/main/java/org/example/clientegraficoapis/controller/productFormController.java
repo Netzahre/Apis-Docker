@@ -58,7 +58,7 @@ public class productFormController {
         if (product == null) {
             if (createProduct()) {
                 Call<Product> call = apiService.createProduct(product);
-                call.enqueue(new Callback<Product>() {
+                call.enqueue(new Callback<>() {
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {
                         Platform.runLater(() -> {
@@ -73,6 +73,7 @@ public class productFormController {
                             }
                         });
                     }
+
                     @Override
                     public void onFailure(Call<Product> call, Throwable throwable) {
                         showMessage("Error al crear el producto");
@@ -83,7 +84,7 @@ public class productFormController {
         } else {
             updateProduct();
             Call<Product> call = apiService.updateProduct(product.getId(), product);
-            call.enqueue(new Callback<Product>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {
                     Platform.runLater(() -> {

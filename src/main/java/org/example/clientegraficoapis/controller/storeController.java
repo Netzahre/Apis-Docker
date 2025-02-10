@@ -62,7 +62,6 @@ public class storeController {
             modButton.setVisible(false);
             deleteButton.setVisible(false);
         }
-        //Iniciar spinners
         spinnerMinPrice.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
         spinnerMaxPrice.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
     }
@@ -111,14 +110,11 @@ public class storeController {
             purchasedProducts.append(product.getName()).append(" (Precio: ").append(product.getPrice()).append(")").append("\n");
         }
 
-        //Añadido, comprobar.
         showError(purchasedProducts.toString());
 
-        //Mandar la compra a la api, la compra tiene la lista de productos y el nombre del comprador, codigo debajo
         Purchases purchases = new Purchases();
         purchases.setProductList(selectedProducts);
         purchases.setPurchaser(Session.getLoggedUser().getUsername());
-        //Hacer post a la api
         Call<Purchases> call = apiService.buy(purchases);
         call.enqueue(new Callback<>() {
             @Override
@@ -127,7 +123,6 @@ public class storeController {
                     Purchases purchases = response.body();
                     System.out.println("Compra realizada correctamente.");
 
-                    //Procesar la compra en el FTP
                     processPurchase(purchases.getProductList().size(), calculateTotalPrice(purchases.getProductList()));
                 }
             }
@@ -243,7 +238,7 @@ public class storeController {
                 maxPrice
         );
 
-        call.enqueue(new Callback<List<Product>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {

@@ -65,7 +65,7 @@ public class logInController {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                t.printStackTrace();
+                System.out.println("Error al hacer login:" + t.getMessage());
             }
         });
     }

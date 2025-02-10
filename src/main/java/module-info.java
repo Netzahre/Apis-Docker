@@ -22,6 +22,7 @@ module org.example.clientegraficoapis {
     opens org.example.clientegraficoapis.session to javafx.fxml;
     opens org.example.clientegraficoapis to javafx.fxml;
     exports org.example.clientegraficoapis;
+    exports org.example.clientegraficoapis.model;
     exports org.example.clientegraficoapis.controller;
     opens org.example.clientegraficoapis.controller to javafx.fxml;
 }

@@ -39,8 +39,6 @@ public class storeController {
     @FXML
     private Button deleteButton;
     @FXML
-    private Button filterButton;
-    @FXML
     private TextField filterTFName;
 
     @FXML
@@ -64,6 +62,9 @@ public class storeController {
             modButton.setVisible(false);
             deleteButton.setVisible(false);
         }
+        //Iniciar spinners
+        spinnerMinPrice.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
+        spinnerMaxPrice.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
     }
 
     private void startTable() {
@@ -173,13 +174,14 @@ public class storeController {
             controller.setProduct(tvProducts.getSelectionModel().getSelectedItem());
             stage.setScene(scene);
             stage.setTitle("Modificar producto de Amazon't");
-            loadProducts();
 
         } else {
             showError("Seleccione un único producto.");
             System.out.println("Seleccione un único producto.");
 
         }
+        loadProducts();
+
     }
 
     @FXML
@@ -211,6 +213,7 @@ public class storeController {
                     } else {
                         showError("Error al eliminar el producto.");
                         System.out.println("Error al eliminar el producto.");
+                        loadProducts();
                     }
                 }
 
@@ -224,21 +227,16 @@ public class storeController {
     }
     @FXML
     public void filter() {
-        // Recoger el criterio de filtrado para el nombre (se trimea para evitar espacios en blanco)
         String nameFilter = filterTFName.getText().trim();
 
-        // Recoger los valores de precio mínimo y máximo desde los Spinners
-        // Si no se han modificado, se envían como null
-        Double minPrice = (spinnerMinPrice.getValue() != null) ? spinnerMinPrice.getValue().doubleValue() : null;
-        Double maxPrice = (spinnerMaxPrice.getValue() != null) ? spinnerMaxPrice.getValue().doubleValue() : null;
+        Double minPrice = (spinnerMinPrice.getValue() > 0) ? spinnerMinPrice.getValue().doubleValue() : null;
+        Double maxPrice = (spinnerMaxPrice.getValue() > 0) ? spinnerMaxPrice.getValue().doubleValue() : null;
 
-        // Si no se especifica ningún filtro, se recargan todos los productos
         if (nameFilter.isEmpty() && minPrice == null && maxPrice == null) {
             loadProducts();
             return;
         }
 
-        // Llamada al endpoint de filtrado. Se envían null para los parámetros que no se hayan definido.
         Call<List<Product>> call = apiService.getProductsFilter(
                 nameFilter.isEmpty() ? null : nameFilter,
                 minPrice,

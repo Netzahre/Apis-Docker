@@ -14,7 +14,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-    //http://localhost:8081/
     @Autowired
     private ProductRepository productRepository;
 
@@ -24,26 +23,22 @@ public class ProductController {
             @RequestParam(required = false) Double minPrice,
             @RequestParam(required = false) Double maxPrice
     ) {
-        // Si se especifica filtro por nombre
         if (name != null && !name.isEmpty()) {
-            // Si se especifican ambos filtros de precio
+
             if (minPrice != null && maxPrice != null) {
                     return productRepository.findByNameContainingAndPriceBetween(name, minPrice, maxPrice);
             }
-            // Si sólo se especifica el precio mínimo
             else if (minPrice != null) {
                     return productRepository.findByNameContainingAndPriceGreaterThanEqual(name, minPrice);
             }
-            // Si sólo se especifica el precio máximo
+
             else if (maxPrice != null) {
                     return productRepository.findByNameContainingAndPriceLessThanEqual(name, maxPrice);
             }
-            // Si sólo se aplica el filtro de nombre (sin filtro de precio)
             else {
                     return productRepository.findByNameContaining(name);
             }
         } else {
-            // Si no se filtra por nombre, se aplican sólo los filtros de precio (si existen)
             if (minPrice != null && maxPrice != null) {
                 return productRepository.findByPriceBetween(minPrice, maxPrice);
             } else if (minPrice != null) {
@@ -55,7 +50,6 @@ public class ProductController {
             }
         }
     }
-
 
     @PostMapping
     public ResponseEntity<?> newProduct(@RequestBody Product product){

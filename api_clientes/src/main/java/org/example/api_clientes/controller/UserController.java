@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 public class UserController {
-    //http://localhost:8080/
 
     @Autowired
     private UserRepository userRepository;

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/purchase")
 public class PurchaseController {
-    //http://localhost:8081/
 
     @Autowired
     private PurchaseRepository purchaseRepository;

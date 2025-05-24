@@ -63,4 +63,3 @@ To build and run ClienteGraficoApis, you'll need the following:
 -   **Retrofit:** A type-safe HTTP client for Java and Android, used for communication with the backend API.
 -   **Gson:** A Java library to convert Java Objects into their JSON representation and vice versa.
 -   **Apache Commons Net:** Used for network utilities, likely for the FTP functionality (`FTPService`) to log purchases.
--   **ControlsFX, FormsFX, ValidatorFX, Ikonli, BootstrapFX, TilesFX, FXGL:** Additional JavaFX libraries that may be used for enhanced UI controls, forms, validation, icons, styling, and other UI components (as seen in `pom.xml`).
